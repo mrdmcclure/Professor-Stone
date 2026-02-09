@@ -1,2 +1,2 @@
 # Professor-Stone
-collector's assistant
+Your Trusted Collecton Advisor
