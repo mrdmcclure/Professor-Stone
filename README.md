@@ -39,6 +39,6 @@ The UI was designed to be intuitive.  Just type your questions for the Professor
 
 ## Notes
 
-The Professor does through research before answering initial prompts, which can take a few minutes.  For very rare species which there is not much information about, this may take even longer.
+The Professor does thorough research before answering initial prompts, which can take a few minutes.  For very rare species which there is not much information about, this may take even longer.
 
 Diagram generation is disabled for Professor Stone.  I have discovered that AI generated diagrams often obfuscate fine details important to collectors, such as those need to identify between very similar species.  This defeats the purpose of generating a diagram as an image.  Instead, the Professor will create a text based diagram.
