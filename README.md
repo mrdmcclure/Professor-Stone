@@ -28,8 +28,13 @@ I have used the Professor Stone CharGPT app to research mineral specimens I have
 3. Run the app:
    `npm run dev`
 
+
+## User Interface
+
+The UI was designed to be intuitive.  Just type your questions for the Professor into the chat.
+
 <div align="center">
-<img width="1200" height="475" alt="GHBanner" src="prof_stone_1st_chat.png" />
+<img width="1200" height="575" alt="GHBanner" src="prof_stone_1st_chat.png" />
 </div>
 
 ## Notes
