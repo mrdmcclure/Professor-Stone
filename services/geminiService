@@ -1,0 +1,51 @@
+
+import { GoogleGenAI, GenerateContentResponse } from "@google/genai";
+import { SYSTEM_INSTRUCTION } from "../constants";
+
+export class GeminiService {
+  async sendMessage(
+    history: { role: 'user' | 'model'; parts: { text: string }[] }[],
+    message: string
+  ): Promise<{ text: string; links: { title: string; url: string }[] }> {
+    try {
+      // Create a fresh instance per call to ensure we always use the latest config/key
+      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY as string });
+      
+      const response: GenerateContentResponse = await ai.models.generateContent({
+        model: 'gemini-3-pro-preview',
+        contents: [
+          ...history,
+          { role: 'user', parts: [{ text: message }] }
+        ],
+        config: {
+          systemInstruction: SYSTEM_INSTRUCTION,
+          tools: [{ googleSearch: {} }],
+        },
+      });
+
+      const text = response.text || "I apologize, but I couldn't formulate a response. Let's try another topic in natural history.";
+      
+      const groundingLinks: { title: string; url: string }[] = [];
+      const candidate = response.candidates?.[0];
+      const chunks = candidate?.groundingMetadata?.groundingChunks;
+      
+      if (chunks) {
+        chunks.forEach((chunk: any) => {
+          if (chunk.web) {
+            groundingLinks.push({
+              title: chunk.web.title || 'Reference',
+              url: chunk.web.uri
+            });
+          }
+        });
+      }
+
+      return { text, links: groundingLinks };
+    } catch (error) {
+      console.error("Gemini API Error:", error);
+      throw error;
+    }
+  }
+}
+
+export const geminiService = new GeminiService();
